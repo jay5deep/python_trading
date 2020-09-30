@@ -25,6 +25,12 @@ def tell_my_pos():
 
     mytext = 'Current Net Profit/Loss is: '+ str(net)
 
+	#symbol="NIFTY BANK"
+	#exchange="NFO"
+	#ltp = kite.ltp(exchange+":"+symbol)
+    #ltp = ltp[exchange+":"+symbol]['last_price']
+	#mytext = 'LTP is: '+ str(ltp)
+
     # Language in which you want to convert
     language = 'en'
 
