@@ -15,6 +15,7 @@ import glob
 import pytz
 import calendar
 from datetime import date
+from random import randint
 
 # assuming now contains a timezone aware datetime
 now = datetime.datetime.now()
@@ -52,27 +53,27 @@ i=0
 while True:
     i=i+1
 
-    nifty = 18000
-    banknifty = 40500
-    finnifty = 18200
-    india_vix = 13.66
-    pnl = 12500
-    available_margin = 200000
-    opening_balance = 75000
-    live_balance = 100000
-    used_margin = 1500000
-    total_margin = 2100000
+    nifty = 18000+randint(0, 50)
+    banknifty = 40500+randint(0, 120)
+    finnifty = 18200+randint(0, 30)
+    india_vix = 13.66+randint(0, 2)
+    pnl = 12500+randint(0, 500)
+    available_margin = 200000+randint(0, 525250)
+    opening_balance = 75000+randint(0, 50000)
+    live_balance = 100000+randint(0, 50000)
+    used_margin = 1500000+randint(0, 50000)
+    total_margin = 2100000+randint(0, 50000)
 
-    prev_nifty = 17900
-    prev_banknifty = 40700
-    prev_finnifty = 18150
-    prev_india_vix = 13.2
-    prev_pnl = 25000
-    prev_available_margin = 250000
-    prev_opening_balance = 60000
-    prev_live_balance = 50000
-    prev_used_margin = 1800000
-    prev_total_margin = 2050000
+    prev_nifty = 17900+randint(0, 90)
+    prev_banknifty = 40700+randint(0, 150)
+    prev_finnifty = 18150+randint(0, 60)
+    prev_india_vix = 13.2+randint(0, 2)
+    prev_pnl = 25000+randint(0, 5000)
+    prev_available_margin = 250000+randint(0, 50000)
+    prev_opening_balance = 60000+randint(0, 50000)
+    prev_live_balance = 50000+randint(0, 50000)
+    prev_used_margin = 1800000+randint(0, 50000)
+    prev_total_margin = 2050000+randint(0, 50000)
 
     utilized=round(((total_margin-available_margin)/total_margin)*100,2)
 
@@ -80,17 +81,8 @@ while True:
 
     start_time = ind_time.now().replace(hour=9, minute=1, second=59, microsecond=0)
     end_time = ind_time.now().replace(hour=15, minute=31, second=59, microsecond=0)
-    if(ind_time.now() > start_time and ind_time.now() < end_time and weekday_name in ['Monday','Tuesday','Wednesday','Thursday','Friday']):
-        weekly_pnl = round(25000+pnl)
-        print("inside")
-    else:
-        weekly_pnl = 25000
-        try:
-            last_day_pnl = round(1)
-        except:
-            pass
-            last_day_pnl = 0
-        pnl = pnl - last_day_pnl
+    
+    weekly_pnl = round(25000+pnl)
 
     rr = round((weekly_pnl/total_margin)*100,2)
 
@@ -109,4 +101,3 @@ while True:
         kpi8.metric(label="Live Balance", value= '₹ '+str(round(live_balance/100000,2))+'L', delta= str(live_balance-opening_balance))
 
         time.sleep(3)
-
